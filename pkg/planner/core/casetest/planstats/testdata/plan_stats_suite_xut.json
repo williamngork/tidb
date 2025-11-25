@@ -180,7 +180,7 @@
     ]
   },
   {
-    "Name": "TestStatsAnalyzedInDDL",
+    "Name": "TestStatsAnalyzedInDDL__HABITAT",
     "Cases": [
       {
         "Query": "alter table t add index idx_c(c)",

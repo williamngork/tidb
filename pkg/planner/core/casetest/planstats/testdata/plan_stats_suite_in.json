@@ -80,7 +80,7 @@
     ]
   },
   {
-    "name": "TestStatsAnalyzedInDDL",
+    "name": "TestStatsAnalyzedInDDL__HABITAT",
     "cases": [
       "alter table t add index idx_c(c)",
       "select * from t use index(idx_c) where c > 1",
