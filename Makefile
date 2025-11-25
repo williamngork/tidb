@@ -842,7 +842,7 @@ bazel_mirror_upload:
 63143_test:
 	$(MAKE) failpoint-enable
 	EXIT_CODE=0; \
-		{ go test ./pkg/planner/core/casetest/planstats -v --tags=intest -run TestStatsAnalyzedInDDL && \
-		  go test ./pkg/ddl -v --tags=intest -run TestAddIndexWithAnalyze; } || EXIT_CODE=$$?; \
+		{ go test ./pkg/planner/core/casetest/planstats -v --tags=intest -run TestStatsAnalyzedInDDL__HABITAT && \
+		  go test ./pkg/ddl -v --tags=intest -run TestAddIndexWithAnalyze__HABITAT; } || EXIT_CODE=$$?; \
 		$(MAKE) failpoint-disable; \
 		exit $$EXIT_CODE

@@ -1143,7 +1143,7 @@ func getJobsBySQL(se sessionapi.Session, tbl, condition string) ([]*model.Job, e
 	return jobs, nil
 }
 
-func TestAddIndexWithAnalyze(t *testing.T) {
+func TestAddIndexWithAnalyze__HABITAT(t *testing.T) {
 	store, dom := testkit.CreateMockStoreAndDomain(t)
 	tk := testkit.NewTestKit(t, store)
 	// add index

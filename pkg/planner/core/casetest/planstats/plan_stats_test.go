@@ -442,7 +442,7 @@ func TestCollectDependingVirtualCols(t *testing.T) {
 	})
 }
 
-func TestStatsAnalyzedInDDL(t *testing.T) {
+func TestStatsAnalyzedInDDL__HABITAT(t *testing.T) {
 	testkit.RunTestUnderCascadesWithDomain(t, func(t *testing.T, testKit *testkit.TestKit, dom *domain.Domain, cascades, caller string) {
 		testKit.MustExec("use test")
 		testKit.MustExec("set session tidb_enable_ddl_analyze = 1")
