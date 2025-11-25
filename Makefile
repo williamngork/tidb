@@ -837,3 +837,12 @@ bazel_sync:
 .PHONY: bazel_mirror_upload
 bazel_mirror_upload:
 	bazel $(BAZEL_GLOBAL_CONFIG) run $(BAZEL_CMD_CONFIG)  //cmd/mirror -- --mirror --upload
+
+.PHONY: 63143_test
+63143_test:
+	$(MAKE) failpoint-enable
+	EXIT_CODE=0; \
+		{ go test ./pkg/planner/core/casetest/planstats -v --tags=intest -run TestStatsAnalyzedInDDL && \
+		  go test ./pkg/ddl/ -v --tags=intest -run TestStatsAnalyze; } || EXIT_CODE=$$?; \
+		$(MAKE) failpoint-disable; \
+		exit $$EXIT_CODE
