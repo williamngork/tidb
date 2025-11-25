@@ -874,6 +874,7 @@ func (sub *SubJob) ToProxyJob(parentJob *Job, seq int) Job {
 		SchemaState:     sub.SchemaState,
 		SnapshotVer:     sub.SnapshotVer,
 		RealStartTS:     sub.RealStartTS,
+		AnalyzeState:    sub.AnalyzeState,
 		StartTS:         parentJob.StartTS,
 		DependencyID:    parentJob.DependencyID,
 		Query:           parentJob.Query,
@@ -904,6 +905,7 @@ func (sub *SubJob) FromProxyJob(proxyJob *Job, ver int64) {
 	if proxyJob.ReorgMeta != nil {
 		sub.ReorgTp = proxyJob.ReorgMeta.ReorgTp
 	}
+	sub.AnalyzeState = proxyJob.AnalyzeState
 }
 
 // FillArgs fills args.
