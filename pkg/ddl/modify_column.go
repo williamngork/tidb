@@ -654,10 +654,6 @@ func (w *worker) doModifyColumnTypeWithData(
 }
 
 func checkAnalyzeNecessary(job *model.Job, changingIdxes []*model.IndexInfo, tbl *model.TableInfo) bool {
-	analyzeVer := vardef.DefTiDBAnalyzeVersion
-	if val, ok := job.GetSystemVars(vardef.TiDBAnalyzeVersion); ok {
-		analyzeVer = variable.TidbOptInt(val, analyzeVer)
-	}
 	enableDDLAnalyze := vardef.DefTiDBEnableDDLAnalyze
 	if val, ok := job.GetSystemVars(vardef.TiDBEnableDDLAnalyze); ok {
 		enableDDLAnalyze = variable.TiDBOptOn(val)
@@ -665,14 +661,13 @@ func checkAnalyzeNecessary(job *model.Job, changingIdxes []*model.IndexInfo, tbl
 	isPartitionedTable := tbl.GetPartitionInfo() == nil
 	hasChangingIdx := len(changingIdxes) > 0
 
-	if enableDDLAnalyze && hasChangingIdx && isPartitionedTable && analyzeVer == 2 {
+	if enableDDLAnalyze && hasChangingIdx && isPartitionedTable {
 		return true
 	}
 	logutil.DDLLogger().Info("skip analyze",
 		zap.Bool("tidb_enable_ddl_analyze", enableDDLAnalyze),
 		zap.Bool("is partitioned table", isPartitionedTable),
-		zap.Int("affected indexes count", len(changingIdxes)),
-		zap.Int("tidb_analyze_version", analyzeVer))
+		zap.Int("affected indexes count", len(changingIdxes)))
 	return false
 }
 
