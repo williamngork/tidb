@@ -11,40 +11,14 @@ Enhance DDL operations by embedding the ANALYZE operation for both `ALTER TABLE 
         - `ALTER TABLE ... CREATE INDEX` operations
         - `ALTER TABLE ... MODIFY COLUMN` operations
 
-
-### Non-Functional Requirements
-
-1. **Reliability**
-    - Proper cleanup on failure
-    - Transaction safety
-    - Manage the state of the ANALYZE operation throughout the ddl job
-
-2. **Observability**
-    - Detailed logging
-    - Metrics for analyze phase
-    - Progress reporting
-
-### Architecture
-
-```
-+------------------+     +------------------+     +------------------+
-|   DDL Worker     | --> |  Index Creation  | --> |  Analyze Phase   |
-+------------------+     +------------------+     +------------------+
-         |                      |                          |
-         v                      v                          v
-+------------------+     +------------------+     +------------------+
-|  Job Scheduler   |     |  Storage Layer   |     |  Statistics API  |
-+------------------+     +------------------+     +------------------+
-```
-
 ### Data Flow
 1. User call `set @@tidb_enable_ddl_analyze = 1` to enable this feature in their session
 2. User executes either:
     - `ALTER TABLE {table name} ADD INDEX...`
     - `ALTER TABLE {table name} MODIFY COLUMN...`
-3. DDL job is created with new analyze state
+3. DDL job is created with new analyze operation
 4. Index creation proceeds as usual
-5. After DDL operation completes (index backfill or column modification), analyze phase begins
+5. After DDL operation completes (index backfill or column modification), analyze operation begins
 6. Statistics are collected and stored
 7. Job completes
 
