@@ -15,6 +15,8 @@ import (
 
 func TestStatsAnalyzedInDDL__HABITAT(t *testing.T) {
 	testkit.RunTestUnderCascadesWithDomain(t, func(t *testing.T, testKit *testkit.TestKit, dom *domain.Domain, cascades, caller string) {
+		testDataMap.LoadTestSuiteData("testdata", "plan_stats_suite__HABITAT", true)
+
 		testKit.MustExec("use test")
 		testKit.MustExec("set session tidb_enable_ddl_analyze = 1")
 		// test normal table
