@@ -5,7 +5,7 @@ Enhance DDL operations by embedding the ANALYZE operation for both `ALTER TABLE 
 
 ### Core Functionality
 1. **Configuration**
-    - New session variable: `tidb_enable_ddl_analyze` (default: 0)
+    - New session variable: `tidb_enable_ddl_analyze`
 2. **DDL Operations with Embedded ANALYZE**
     - when tidb_enable_ddl_analyze is set to 1, Execute ANALYZE as part of the DDL job for both:
         - `ALTER TABLE ... CREATE INDEX` operations
@@ -16,11 +16,8 @@ Enhance DDL operations by embedding the ANALYZE operation for both `ALTER TABLE 
 2. User executes either:
     - `ALTER TABLE {table name} ADD INDEX...`
     - `ALTER TABLE {table name} MODIFY COLUMN...`
-3. DDL job is created with new analyze operation
-4. Index creation proceeds as usual
-5. After DDL operation completes (index backfill or column modification), analyze operation begins
-6. Statistics are collected and stored
-7. Job completes
+3. Index creation / column modification proceeds as usual, along with analyze operation
+4. Statistics are collected and stored
 
 ### API Changes
 
