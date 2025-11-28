@@ -31,7 +31,7 @@ func TestStatsAnalyzedInDDL__HABITAT(t *testing.T) {
 				Result []string
 			}
 		)
-		testData := GetPlanStatsData()
+		testData := testDataMap["plan_stats_suite__HABITAT"]
 		testData.LoadTestCases(t, &input, &output, cascades, caller)
 		var (
 			lastIsSelect     bool
