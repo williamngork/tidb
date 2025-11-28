@@ -10,7 +10,7 @@ Enhance DDL operations by embedding the ANALYZE operation for both `ALTER TABLE 
     - when tidb_enable_ddl_analyze is set to 1, Execute ANALYZE as part of the DDL job for both:
         - `ALTER TABLE ... CREATE INDEX` operations
         - `ALTER TABLE ... MODIFY COLUMN` operations
-
+    - partition tables or multi-index ADD INDEX DDL should not get automatic ANALYZE
 ### Data Flow
 1. User call `set @@tidb_enable_ddl_analyze = 1` to enable this feature in their session
 2. User executes either:
