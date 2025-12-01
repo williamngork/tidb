@@ -6,7 +6,7 @@ import (
 	"github.com/pingcap/tidb/pkg/testkit"
 )
 
-func TestOuterJoinElimination(t *testing.T) {
+func TestOuterJoinElimination__HABITAT(t *testing.T) {
 	store := testkit.CreateMockStore(t)
 	tk := testkit.NewTestKit(t, store)
 	tk.MustExec("use test")
