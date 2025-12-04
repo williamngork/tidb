@@ -45,6 +45,9 @@ import (
 	"github.com/pingcap/tidb/pkg/util/memory"
 )
 
+// IsChildCloseCalledForTest is used for test
+var IsChildCloseCalledForTest = false
+
 var (
 	_ exec.Executor = &HashJoinV1Exec{}
 	_ exec.Executor = &NestedLoopApplyExec{}
