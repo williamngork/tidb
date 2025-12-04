@@ -1458,7 +1458,9 @@ func TestMultiSchemaTruncatePartitionWithGlobalIndex(t *testing.T) {
 			tkNO.MustContainErrMsg(`update t set b = 5 where a = 41`, "[kv:1062]Duplicate entry '5' for key 't.uk_b'")
 			tkNO.MustExec(`update t set a = 5 where b = "41"`)
 			require.Equal(t, uint64(1), tkNO.Session().GetSessionVars().StmtCtx.AffectedRows())
+			tkO.MustExec(`begin`)
 			tkO.MustExec(`update t set a = 7 where b = "43"`)
+			tkO.MustExec(`commit`)
 			require.Equal(t, uint64(1), tkO.Session().GetSessionVars().StmtCtx.AffectedRows())
 			// This should be silently deleted / overwritten
 			tkO.MustExec(`update t set b = 5 where b = "43"`)
