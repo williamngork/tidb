@@ -1,4 +1,4 @@
-package core
+package ddl_test
 
 import (
 	"testing"
