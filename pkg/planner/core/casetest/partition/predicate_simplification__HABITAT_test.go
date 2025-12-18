@@ -6,9 +6,7 @@ import (
 	"github.com/pingcap/tidb/pkg/testkit"
 )
 
-// TestIssue62923 tests for issue https://github.com/pingcap/tidb/issues/62923
-// which causes an assertion failure during PredicateSimplification with JSON columns and CTE.
-func TestIssue62923(t *testing.T) {
+func TestIssue62923__HABITAT(t *testing.T) {
 	testkit.RunTestUnderCascades(t, func(t *testing.T, tk *testkit.TestKit, cascades, caller string) {
 		tk.MustExec("use test")
 
