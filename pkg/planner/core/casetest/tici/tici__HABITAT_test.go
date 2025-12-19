@@ -47,7 +47,8 @@ func TestTiCISearchExplain__HABITAT(t *testing.T) {
 		Plan []string
 		Warn []string
 	}
-	integrationSuiteData := GetFTSIndexSuiteData()
+	testDataMap.LoadTestSuiteData("testdata", "tici_index_suite__HABITAT")
+	integrationSuiteData := testDataMap["tici_index_suite__HABITAT"]
 	integrationSuiteData.LoadTestCases(t, &input, &output)
 	for i, tt := range input {
 		testdata.OnRecord(func() {
